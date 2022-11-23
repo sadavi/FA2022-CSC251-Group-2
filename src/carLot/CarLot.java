@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CarLot {
-	private Car[] inventory;
+	private ArrayList<Car> inventory = new ArrayList<Car>();
 	private int numberOfCars = 0;
 	private int capacity = 0;
 	
@@ -14,7 +14,8 @@ public class CarLot {
 	
 	public CarLot(int capacity) {
 		this.capacity = capacity;
-		this.inventory = new Car[capacity];
+		this.inventory = new ArrayList<Car>();
+		this.inventory.ensureCapacity(capacity);
 	}
 	
 	public void addCar(String id, int mileage, int mpg, double cost, double salesPrice) {
