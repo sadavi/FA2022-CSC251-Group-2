@@ -20,7 +20,7 @@ public class CarLot {
 	
 	public void addCar(String id, int mileage, int mpg, double cost, double salesPrice) {
 		if (numberOfCars < capacity) {
-			this.inventory[numberOfCars] = new Car(id, mileage, mpg, cost, salesPrice);
+			this.inventory.add(numberOfCars, new Car(id, mileage, mpg, cost, salesPrice));
 			numberOfCars++;
 		}
 	}
@@ -28,14 +28,14 @@ public class CarLot {
 	public Car[] getInventory() {
 		Car[] allCars = new Car[numberOfCars];
 		for (int i = 0; i < numberOfCars; i++) {
-			allCars[i] = this.inventory[i];
+			allCars[i] = this.inventory.get(i);
 		}
 		return allCars;
 	}
 	
 	public Car findCarByIdentifier(String identifier) {
-		for (int x = 0; x < this.inventory.length; x++) {
-			Car aCar = this.inventory[x];
+		for (int x = 0; x < this.inventory.size(); x++) {
+			Car aCar = this.inventory.get(x);
 			if (aCar.getId().equals(identifier)) {
 				return aCar;
 			}
@@ -52,12 +52,12 @@ public class CarLot {
 		}
 	}
 	
-	public Car[] getCarsInOrderOfEntry() { return this.inventory; }
+	public ArrayList<Car> getCarsInOrderOfEntry() { return this.inventory; }
 	
 	public ArrayList<Car> getCarsSortedByMPG() {
 		ArrayList<Car> allCars = new ArrayList<>();
 		for (int i = 0; i < numberOfCars; i++) {
-			allCars.add(this.inventory[i]);
+			allCars.add(this.inventory.get(i));
 		}
 		Collections.sort(allCars, (Car c1, Car c2) -> c2.compareMPG(c1));
 		return allCars;
@@ -67,7 +67,7 @@ public class CarLot {
 		Car rtn = null;
 		int bestMpg = -1;
 		for (int i = 0; i < numberOfCars; i++) {
-			Car aCar = this.inventory[i];
+			Car aCar = this.inventory.get(i);
 			if (aCar.getMpg() > bestMpg) {
 				bestMpg = aCar.getMpg();
 				rtn = aCar;
@@ -80,7 +80,7 @@ public class CarLot {
 		Car rtn = null;
 		int highestMileage = -1;
 		for (int i = 0; i < numberOfCars; i++) {
-			Car aCar = this.inventory[i];
+			Car aCar = this.inventory.get(i);
 			if (aCar.getMileage() > highestMileage) {
 				highestMileage = aCar.getMileage();
 				rtn = aCar;
@@ -92,7 +92,7 @@ public class CarLot {
 	public double getAverageMpg() {
 		double totalMpg = 0D;
 		for (int i = 0; i < numberOfCars; i++) {
-			Car aCar = this.inventory[i];
+			Car aCar = this.inventory.get(i);
 			totalMpg += aCar.getMpg();
 		}
 		return totalMpg / this.numberOfCars;
@@ -101,7 +101,7 @@ public class CarLot {
 	public double getTotalProfit() {
 		double profit = 0D;
 		for (int i = 0; i < numberOfCars; i++) {
-			Car aCar = this.inventory[i];
+			Car aCar = this.inventory.get(i);
 			profit += (aCar.isSold()?aCar.getProfit():0);
 		}
 		return profit;
