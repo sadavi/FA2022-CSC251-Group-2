@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import carLot.Car;
 import carLot.CarLot;
 import javafx.application.Application;
@@ -36,22 +38,22 @@ public class Main extends Application {
 
 	CarLot carLotTest = new CarLot();
 
+	// BorderPane with TOP,CENTER,RIGHT
+	BorderPane border = new BorderPane();
+
+	ObservableList<Car> tableData = FXCollections.observableList(carLotTest.getCarsInOrderOfEntry());
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			primaryStage.setTitle("CarLot X: Welcome!");
-			BorderPane border = new BorderPane();
+			primaryStage.setTitle("CarLot Inventory: Welcome!");
 
 			//
-			ObservableList<Car> tableData = FXCollections.observableList(carLotTest.getInventory());
-			TableView<Car> inventoryView = new TableView<Car>();
-			TableColumn<Car, String> col1 = new TableColumn<>("Car");
-			col1.setCellValueFactory(new PropertyValueFactory<Car, String>("id"));
-			inventoryView.getColumns().add(col1);
-			//
+			ListView<Car> inventoryView = new ListView<Car>(tableData);
+			System.out.println(tableData);
 
-			inventoryView.setItems(tableData);
+			// tableData is updated and prints to console when adding car, but car does not
+			// show in listview UI
 
 			// set BorderPane
 			border.setTop(addHBox());
@@ -77,20 +79,14 @@ public class Main extends Application {
 			double price = Double.parseDouble(tfcarPrice.getText());
 			carLotTest.addCar(carID, mileage, mpg, cost, price);
 			System.out.println(carLotTest.getInventory());
+			System.out.println(tableData);
 			tfcarName.setText("");
 			tfcarMileage.setText("");
 			tfcarMPG.setText("");
 			tfcarCost.setText("");
 			tfcarPrice.setText("");
 		});
-		
-		/*
-		 *  ERROR
-		 *  1 DEC 2022:
-		 *  Successfully instantiates Car object "Justin" in carLot
-		 *  but throws IllegalArgument "No car identifier for Justin"
-		 *  when selling car.
-		 */
+
 		sellButton.setOnAction(e -> {
 			String carID = tfcarName.getText();
 			double priceSold = Double.parseDouble(tfcarSold.getText());
@@ -110,7 +106,7 @@ public class Main extends Application {
 		Button soldButton = new Button("View Sold");
 		hBox.getChildren().addAll(allButton, soldButton);
 		allButton.setOnAction(e -> {
-
+			// needs work
 			carLotTest.getInventory();
 		});
 		return hBox;
