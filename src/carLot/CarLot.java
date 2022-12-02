@@ -7,23 +7,24 @@ public class CarLot {
 	private ArrayList<Car> inventory = new ArrayList<Car>();
 	private int numberOfCars = 0;
 	private int capacity = 0;
-	
-	public CarLot() { 
-		this(100); 
+
+	public CarLot() {
+		this(100);
 	}
-	
+
 	public CarLot(int capacity) {
 		this.capacity = capacity;
 		this.inventory = new ArrayList<Car>();
 		this.inventory.ensureCapacity(capacity);
 	}
-	
+
 	public void addCar(String id, int mileage, int mpg, double cost, double salesPrice) {
 		if (numberOfCars < capacity) {
 			this.inventory.add(numberOfCars, new Car(id, mileage, mpg, cost, salesPrice));
 			numberOfCars++;
 		}
 	}
+
 	// updated getInventory() to return copy of this.inventory as ArrayList<Car>
 	// using .forEach, internal iterator
 	public ArrayList<Car> getInventory() {
@@ -31,17 +32,16 @@ public class CarLot {
 		this.inventory.forEach(e -> allCars.add(e));
 		return allCars;
 	}
-	
+
 	public Car findCarByIdentifier(String identifier) {
-		for (int x = 0; x < this.inventory.size(); x++) {
-			Car aCar = this.inventory.get(x);
-			if (aCar.getId().equals(identifier)) {
-				return aCar;
+		for (Car car : this.inventory) {
+			if (car.getId().equals(identifier)) {
+				return car;
 			}
 		}
 		return null;
 	}
-	
+
 	public void sellCar(String identifier, double priceSold) throws IllegalArgumentException {
 		Car aCar = this.findCarByIdentifier(identifier);
 		if (aCar != null) {
@@ -50,9 +50,11 @@ public class CarLot {
 			throw new IllegalArgumentException("No car with identifier " + identifier);
 		}
 	}
-	
-	public ArrayList<Car> getCarsInOrderOfEntry() { return this.inventory; }
-	
+
+	public ArrayList<Car> getCarsInOrderOfEntry() {
+		return this.inventory;
+	}
+
 	public ArrayList<Car> getCarsSortedByMPG() {
 		ArrayList<Car> allCars = new ArrayList<>();
 		for (int i = 0; i < numberOfCars; i++) {
@@ -61,7 +63,7 @@ public class CarLot {
 		Collections.sort(allCars, (Car c1, Car c2) -> c2.compareMPG(c1));
 		return allCars;
 	}
-	
+
 	public Car getCarWithBestMPG() {
 		Car rtn = null;
 		int bestMpg = -1;
@@ -74,7 +76,7 @@ public class CarLot {
 		}
 		return rtn;
 	}
-	
+
 	public Car getCarWithHighestMileage() {
 		Car rtn = null;
 		int highestMileage = -1;
@@ -87,7 +89,7 @@ public class CarLot {
 		}
 		return rtn;
 	}
-	
+
 	public double getAverageMpg() {
 		double totalMpg = 0D;
 		for (int i = 0; i < numberOfCars; i++) {
@@ -96,14 +98,14 @@ public class CarLot {
 		}
 		return totalMpg / this.numberOfCars;
 	}
-	
+
 	public double getTotalProfit() {
 		double profit = 0D;
 		for (int i = 0; i < numberOfCars; i++) {
 			Car aCar = this.inventory.get(i);
-			profit += (aCar.isSold()?aCar.getProfit():0);
+			profit += (aCar.isSold() ? aCar.getProfit() : 0);
 		}
 		return profit;
 	}
-	
+
 }
