@@ -24,12 +24,11 @@ public class CarLot {
 			numberOfCars++;
 		}
 	}
-	
-	public Car[] getInventory() {
-		Car[] allCars = new Car[numberOfCars];
-		for (int i = 0; i < numberOfCars; i++) {
-			allCars[i] = this.inventory.get(i);
-		}
+	// updated getInventory() to return copy of this.inventory as ArrayList<Car>
+	// using .forEach, internal iterator
+	public ArrayList<Car> getInventory() {
+		ArrayList<Car> allCars = new ArrayList<Car>();
+		this.inventory.forEach(e -> allCars.add(e));
 		return allCars;
 	}
 	
