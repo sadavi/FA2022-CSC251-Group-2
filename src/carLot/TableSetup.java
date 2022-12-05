@@ -1,4 +1,4 @@
-package sqlCarLot;
+package carLot;
 
 import java.sql.*;
 
