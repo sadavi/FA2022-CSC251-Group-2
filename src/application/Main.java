@@ -113,7 +113,7 @@ public class Main extends Application {
 			System.out.println(carLotTest.returnSoldCars());
 		});
 		hBox.getChildren().addAll(new Label("Car Name"), tfcarName, new Label("Mileage"), tfcarMileage,
-				new Label("MPG"), tfcarMPG, new Label("Cost"), tfcarCost, new Label("Retail Price"), tfcarPrice
+				new Label("MPG"), tfcarMPG, new Label("Cost"), tfcarCost, new Label("Retail Price"), tfcarPrice);
 		return hBox;
 	}
 
