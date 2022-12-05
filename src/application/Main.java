@@ -106,11 +106,17 @@ public class Main extends Application {
 		Button soldButton = new Button("View Sold");
 		hBox.getChildren().addAll(allButton, soldButton);
 		allButton.setOnAction(e -> {
-			// needs work
-			carLotTest.getInventory();
+			System.out.println(carLotTest.getInventory());
 		});
+		
+		soldButton.setOnAction(e -> {
+			System.out.println(carLotTest.returnSoldCars());
+		});
+		hBox.getChildren().addAll(new Label("Car Name"), tfcarName, new Label("Mileage"), tfcarMileage,
+				new Label("MPG"), tfcarMPG, new Label("Cost"), tfcarCost, new Label("Retail Price"), tfcarPrice
 		return hBox;
 	}
+
 
 	/*
 	 * public GridPane addGrid() { GridPane grid = new GridPane(); grid.setHgap(10);
