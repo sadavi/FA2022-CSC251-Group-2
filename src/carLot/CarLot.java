@@ -32,6 +32,17 @@ public class CarLot {
 		this.inventory.forEach(e -> allCars.add(e));
 		return allCars;
 	}
+	
+	public ArrayList<Car> returnSoldCars() {
+		ArrayList<Car> soldCars = new ArrayList<Car>();
+		for (int i = 0; i < numberOfCars; i++) {
+			Car aCar = this.inventory.get(i);
+			if (aCar.isSold() != false) {
+				soldCars.add(this.inventory.get(i));
+			}
+		}
+		return soldCars;	
+	}
 
 	public Car findCarByIdentifier(String identifier) {
 		for (Car car : this.inventory) {
