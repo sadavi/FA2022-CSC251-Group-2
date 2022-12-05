@@ -27,6 +27,25 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/*
+ * application.Main is an application to:
+ * Run a limited JavaFX implementation of the CarLot and Car classes.
+ * The program instantiates a CarLot object, and provides GUI buttons to:
+ *     ADD A CAR
+ *     SELL A CAR
+ * 	   VIEW all in INVENTORY
+ *     VIEW all SOLD
+ *     
+ * The GUI is built with a BorderPane at root, having TOP, RIGHT, and CENTER nodes.
+ * The TOP node contains buttons for creating a list view: of all cars, or all sold cars.
+ * The CENTER node is the display pane (ListView, TableView, or TextArea) to display queried results.
+ * The RIGHT node contains buttons for adding and selling (updating) a Car object from the instantiated CarLot.
+ *     
+ * Currently, the Add and Sell functions operate as expected.
+ * The ListView/TableView/TextArea may not display correct results: 12/5/2022.
+ * 
+ * */
+
 public class Main extends Application {
 
 	private TextField tfcarName = new TextField();
